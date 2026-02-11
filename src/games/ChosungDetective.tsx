@@ -5,7 +5,7 @@ import GameResult from '../components/GameResult';
 import { sounds, vibrate } from '../utils/sound';
 import { shuffle, pickRandom } from '../utils/shuffle';
 
-const CHOSUNG = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅃ','ㅆ','ㅉ'];
+const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
 function getChosung(word: string): string {
   return word.split('').map(ch => {
