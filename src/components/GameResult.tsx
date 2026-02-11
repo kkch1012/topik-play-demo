@@ -33,7 +33,7 @@ export default function GameResult({ score, maxCombo, correctCount, totalCount, 
         initial={{ scale: 0.8, y: 30 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', damping: 15 }}
-        className="w-full max-w-sm bg-slate-800 rounded-3xl p-6 text-center border border-slate-700/50 shadow-2xl"
+        className="w-full max-w-sm bg-slate-800 rounded-3xl p-4 sm:p-6 text-center border border-slate-700/50 shadow-2xl"
       >
         <h2 className="text-lg font-bold text-slate-300 mb-2">{gameName}</h2>
         <p className="text-sm text-slate-400 mb-4">게임 완료!</p>
@@ -47,18 +47,18 @@ export default function GameResult({ score, maxCombo, correctCount, totalCount, 
           <span className="text-5xl font-black text-white drop-shadow-lg">{grade}</span>
         </motion.div>
 
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-slate-700/50 rounded-xl p-3">
-            <p className="text-2xl font-bold text-accent-400">{score.toLocaleString()}</p>
-            <p className="text-xs text-slate-400 mt-1">점수</p>
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <div className="bg-slate-700/50 rounded-xl p-2 sm:p-3">
+            <p className="text-lg sm:text-2xl font-bold text-accent-400">{score.toLocaleString()}</p>
+            <p className="text-[10px] sm:text-xs text-slate-400 mt-1">점수</p>
           </div>
-          <div className="bg-slate-700/50 rounded-xl p-3">
-            <p className="text-2xl font-bold text-game-purple">x{maxCombo}</p>
-            <p className="text-xs text-slate-400 mt-1">최대 콤보</p>
+          <div className="bg-slate-700/50 rounded-xl p-2 sm:p-3">
+            <p className="text-lg sm:text-2xl font-bold text-game-purple">x{maxCombo}</p>
+            <p className="text-[10px] sm:text-xs text-slate-400 mt-1">최대 콤보</p>
           </div>
-          <div className="bg-slate-700/50 rounded-xl p-3">
-            <p className="text-2xl font-bold text-game-green">{accuracy}%</p>
-            <p className="text-xs text-slate-400 mt-1">정확도</p>
+          <div className="bg-slate-700/50 rounded-xl p-2 sm:p-3">
+            <p className="text-lg sm:text-2xl font-bold text-game-green">{accuracy}%</p>
+            <p className="text-[10px] sm:text-xs text-slate-400 mt-1">정확도</p>
           </div>
         </div>
 

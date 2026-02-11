@@ -10,7 +10,7 @@ const games = [
     desc: '초성 힌트를 보고 한국어 단어를 맞춰보세요',
     gradient: 'from-primary-500 to-game-cyan',
     category: 'Speed',
-    difficulty: '⭐⭐',
+    difficulty: 2,
   },
   {
     id: 'antonym-finder',
@@ -20,7 +20,7 @@ const games = [
     desc: '주어진 단어의 반대말을 빠르게 찾아보세요',
     gradient: 'from-game-pink to-game-purple',
     category: 'Logic',
-    difficulty: '⭐⭐',
+    difficulty: 2,
   },
   {
     id: 'card-matching',
@@ -30,7 +30,7 @@ const games = [
     desc: '한국어-영어 같은 뜻 카드 쌍을 찾으세요',
     gradient: 'from-game-yellow to-accent-500',
     category: 'Memory',
-    difficulty: '⭐',
+    difficulty: 1,
   },
   {
     id: 'word-math',
@@ -40,7 +40,7 @@ const games = [
     desc: '음절을 더하고 빼서 단어를 완성하세요',
     gradient: 'from-game-green to-game-cyan',
     category: 'Logic',
-    difficulty: '⭐⭐⭐',
+    difficulty: 3,
   },
   {
     id: 'letter-hide-seek',
@@ -50,7 +50,7 @@ const games = [
     desc: '글자판에서 숨어있는 단어를 찾아보세요',
     gradient: 'from-game-purple to-game-pink',
     category: 'Visual',
-    difficulty: '⭐⭐',
+    difficulty: 2,
   },
 ];
 
@@ -58,14 +58,14 @@ export default function Home() {
   return (
     <div className="min-h-screen pb-8">
       {/* Hero */}
-      <div className="text-center pt-12 pb-8 px-6">
+      <div className="text-center pt-8 sm:pt-12 pb-6 sm:pb-8 px-4 sm:px-6">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-6xl mb-4 animate-float">🎮</div>
-          <h1 className="text-4xl font-black mb-2">
+          <div className="text-5xl sm:text-6xl mb-3 sm:mb-4 animate-float">🎮</div>
+          <h1 className="text-3xl sm:text-4xl font-black mb-2">
             <span className="bg-gradient-to-r from-primary-400 via-game-purple to-game-pink bg-clip-text text-transparent">
               TOPIK PLAY
             </span>
@@ -103,7 +103,7 @@ export default function Home() {
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="mx-4 mb-6 p-4 rounded-2xl bg-gradient-to-r from-primary-600/20 to-game-purple/20 border border-primary-500/20"
+        className="mx-3 sm:mx-4 mb-4 sm:mb-6 p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-primary-600/20 to-game-purple/20 border border-primary-500/20"
       >
         <div className="flex items-center gap-3">
           <span className="text-2xl">⚡</span>
@@ -115,7 +115,7 @@ export default function Home() {
       </motion.div>
 
       {/* Game Cards */}
-      <div className="px-4 space-y-3">
+      <div className="px-3 sm:px-4 space-y-3">
         <h2 className="text-sm font-bold text-slate-400 px-1 mb-2">게임 선택</h2>
         {games.map((game, i) => (
           <motion.div
@@ -128,22 +128,24 @@ export default function Home() {
               <motion.div
                 whileHover={{ scale: 1.02, x: 5 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-slate-600/50 transition-all group"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-slate-600/50 transition-all group"
               >
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${game.gradient} flex items-center justify-center text-2xl shadow-lg flex-shrink-0`}>
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${game.gradient} flex items-center justify-center text-xl sm:text-2xl shadow-lg flex-shrink-0`}>
                   {game.emoji}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="font-bold text-white group-hover:text-primary-300 transition-colors">{game.name}</h3>
-                    <span className="px-1.5 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400">{game.category}</span>
+                    <h3 className="font-bold text-sm sm:text-base text-white group-hover:text-primary-300 transition-colors truncate">{game.name}</h3>
+                    <span className="px-1.5 py-0.5 bg-slate-700/50 rounded text-[10px] text-slate-400 flex-shrink-0">{game.category}</span>
                   </div>
-                  <p className="text-xs text-slate-500 mb-1">{game.nameEn}</p>
-                  <p className="text-xs text-slate-400">{game.desc}</p>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mb-0.5">{game.nameEn}</p>
+                  <p className="text-[11px] sm:text-xs text-slate-400 truncate">{game.desc}</p>
                 </div>
-                <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                  <span className="text-xs">{game.difficulty}</span>
-                  <span className="text-slate-500 group-hover:text-primary-400 transition-colors text-lg">→</span>
+                <div className="flex flex-col items-end gap-1 flex-shrink-0 pl-1">
+                  <span className="text-[11px] text-game-yellow tracking-tight">
+                    {'★'.repeat(game.difficulty)}{'☆'.repeat(3 - game.difficulty)}
+                  </span>
+                  <span className="text-slate-500 group-hover:text-primary-400 transition-colors text-base sm:text-lg">→</span>
                 </div>
               </motion.div>
             </Link>
@@ -156,7 +158,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="text-center mt-10 px-4"
+        className="text-center mt-8 sm:mt-10 px-3 sm:px-4"
       >
         <div className="p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30">
           <p className="text-xs text-slate-500 mb-1">적응형 학습 시스템</p>

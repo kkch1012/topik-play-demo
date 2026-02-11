@@ -361,7 +361,7 @@ export default function LetterHideSeek() {
                     }
                   }}
                   data-rc={`${r}-${c}`}
-                  className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg border-2 text-lg font-bold cursor-pointer transition-all duration-150 ${cellStyle}`}
+                  className={`w-[calc((100vw-3.5rem)/7)] h-[calc((100vw-3.5rem)/7)] max-w-12 max-h-12 flex items-center justify-center rounded-md sm:rounded-lg border-2 text-sm sm:text-lg font-bold cursor-pointer transition-all duration-150 ${cellStyle}`}
                   whileTap={{ scale: 0.9 }}
                 >
                   {ch}

@@ -16,33 +16,33 @@ export default function GameHeader({ title, emoji, score, combo = 0, timeLeft, l
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-slate-800/80 backdrop-blur-sm border-b border-slate-700/50">
+    <div className="flex items-center justify-between px-2 sm:px-4 py-2 sm:py-3 bg-slate-800/80 backdrop-blur-sm border-b border-slate-700/50">
       <button
         onClick={() => navigate('/')}
-        className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-700/50 hover:bg-slate-600/50 transition-colors text-lg"
+        className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg sm:rounded-xl bg-slate-700/50 hover:bg-slate-600/50 transition-colors text-sm sm:text-lg flex-shrink-0"
       >
         ←
       </button>
 
-      <div className="flex items-center gap-2">
-        <span className="text-xl">{emoji}</span>
-        <span className="font-bold text-sm">{title}</span>
+      <div className="flex items-center gap-1 sm:gap-2 min-w-0 mx-1 sm:mx-2">
+        <span className="text-base sm:text-xl flex-shrink-0">{emoji}</span>
+        <span className="font-bold text-xs sm:text-sm truncate">{title}</span>
         {level && (
-          <span className="px-2 py-0.5 bg-primary-600/30 text-primary-300 text-xs rounded-full font-medium">
+          <span className="px-1.5 sm:px-2 py-0.5 bg-primary-600/30 text-primary-300 text-[10px] sm:text-xs rounded-full font-medium flex-shrink-0">
             Lv.{level}
           </span>
         )}
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
         {round && (
-          <span className="text-xs text-slate-400">{round.current}/{round.total}</span>
+          <span className="text-[10px] sm:text-xs text-slate-400">{round.current}/{round.total}</span>
         )}
         {lives !== undefined && (
-          <span className="text-sm">{'❤️'.repeat(Math.max(0, lives))}{'🖤'.repeat(Math.max(0, 3 - lives))}</span>
+          <span className="text-xs sm:text-sm">{'❤️'.repeat(Math.max(0, lives))}{'🖤'.repeat(Math.max(0, 3 - lives))}</span>
         )}
         {timeLeft !== undefined && (
-          <div className={`px-2 py-0.5 rounded-lg text-sm font-mono font-bold ${timeLeft <= 10 ? 'bg-game-red/20 text-game-red' : 'bg-slate-700/50 text-slate-300'}`}>
+          <div className={`px-1.5 sm:px-2 py-0.5 rounded-lg text-xs sm:text-sm font-mono font-bold ${timeLeft <= 10 ? 'bg-game-red/20 text-game-red' : 'bg-slate-700/50 text-slate-300'}`}>
             {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
           </div>
         )}
@@ -50,7 +50,7 @@ export default function GameHeader({ title, emoji, score, combo = 0, timeLeft, l
           key={score}
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 0.2 }}
-          className="px-3 py-0.5 rounded-lg bg-accent-500/20 text-accent-400 font-bold text-sm"
+          className="px-2 sm:px-3 py-0.5 rounded-lg bg-accent-500/20 text-accent-400 font-bold text-xs sm:text-sm"
         >
           {score.toLocaleString()}
         </motion.div>
@@ -59,7 +59,7 @@ export default function GameHeader({ title, emoji, score, combo = 0, timeLeft, l
             key={combo}
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="px-2 py-0.5 rounded-full bg-game-purple/20 text-game-purple text-xs font-bold"
+            className="px-1.5 sm:px-2 py-0.5 rounded-full bg-game-purple/20 text-game-purple text-[10px] sm:text-xs font-bold"
           >
             x{combo}
           </motion.div>

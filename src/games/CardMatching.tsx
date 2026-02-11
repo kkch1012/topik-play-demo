@@ -240,7 +240,7 @@ export default function CardMatching() {
         </p>
 
         <div
-          className="grid gap-2 w-full max-w-md"
+          className="grid gap-1.5 sm:gap-2 w-full max-w-sm sm:max-w-md"
           style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
         >
           {cards.map((card) => {
@@ -262,15 +262,15 @@ export default function CardMatching() {
                   style={{ transformStyle: 'preserve-3d' }}
                 >
                   {/* Back (hidden) */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 border-2 border-primary-400/30 flex items-center justify-center backface-hidden shadow-lg"
+                  <div className="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 border-2 border-primary-400/30 flex items-center justify-center backface-hidden shadow-lg"
                     style={{ backfaceVisibility: 'hidden' }}
                   >
-                    <span className="text-2xl font-black text-white/30">?</span>
+                    <span className="text-xl sm:text-2xl font-black text-white/30">?</span>
                   </div>
 
                   {/* Front (content) */}
                   <div
-                    className={`absolute inset-0 rounded-xl flex flex-col items-center justify-center p-1 border-2 shadow-lg ${
+                    className={`absolute inset-0 rounded-lg sm:rounded-xl flex flex-col items-center justify-center p-0.5 sm:p-1 border-2 shadow-lg ${
                       isMatched
                         ? 'bg-game-green/20 border-game-green/50'
                         : card.type === 'korean'
@@ -279,10 +279,10 @@ export default function CardMatching() {
                     }`}
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                   >
-                    <span className={`font-bold ${card.type === 'korean' ? 'text-lg text-game-pink' : 'text-sm text-game-cyan'}`}>
+                    <span className={`font-bold ${card.type === 'korean' ? 'text-base sm:text-lg text-game-pink' : 'text-xs sm:text-sm text-game-cyan'}`}>
                       {card.type === 'korean' ? card.korean : card.english}
                     </span>
-                    <span className={`text-[10px] mt-0.5 ${card.type === 'korean' ? 'text-game-pink/50' : 'text-game-cyan/50'}`}>
+                    <span className={`text-[9px] sm:text-[10px] mt-0.5 ${card.type === 'korean' ? 'text-game-pink/50' : 'text-game-cyan/50'}`}>
                       {card.type === 'korean' ? '한국어' : 'English'}
                     </span>
                   </div>
