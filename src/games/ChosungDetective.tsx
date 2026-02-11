@@ -103,7 +103,7 @@ const WORDS: WordData[] = [
   { word: '여행', meaning: 'travel', level: 1 },
   { word: '은행', meaning: 'bank', level: 1 },
   { word: '영화', meaning: 'movie', level: 1 },
-  { word: '요함', meaning: 'importance', level: 3 },
+  { word: '응원', meaning: 'cheering', level: 2 },
   // ㅇㄷ group
   { word: '운동', meaning: 'exercise', level: 1 },
   { word: '이동', meaning: 'movement', level: 2 },
@@ -178,7 +178,6 @@ const WORDS: WordData[] = [
   { word: '지하철', meaning: 'subway', level: 1 },
   { word: '자동차', meaning: 'car', level: 1 },
   { word: '교과서', meaning: 'textbook', level: 2 },
-  { word: '도서관', meaning: 'library', level: 2 },
   { word: '운동장', meaning: 'playground', level: 1 },
 ];
 
@@ -193,6 +192,7 @@ export default function ChosungDetective() {
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [levelCorrect, setLevelCorrect] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [currentWord, setCurrentWord] = useState<WordData | null>(null);
   const [chosung, setChosung] = useState('');
@@ -248,6 +248,7 @@ export default function ChosungDetective() {
     setCombo(0);
     setMaxCombo(0);
     setCorrectCount(0);
+    setLevelCorrect(0);
     setRound(1);
     setTimeLeft(TIME_LIMIT);
     setLevel(1);
@@ -258,6 +259,7 @@ export default function ChosungDetective() {
     if (gameState === 'playing' && round > 0) {
       generateRound();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, gameState]);
 
   useEffect(() => {
@@ -300,8 +302,13 @@ export default function ChosungDetective() {
           setGameState('result');
           sounds.levelUp();
         } else {
-          const newLevel = correctCount + 1 >= 5 ? Math.min(3, level + 1) : level;
-          setLevel(newLevel);
+          const newLevelCorrect = levelCorrect + 1;
+          if (newLevelCorrect >= 3 && level < 3) {
+            setLevel(prev => Math.min(3, prev + 1));
+            setLevelCorrect(0);
+          } else {
+            setLevelCorrect(newLevelCorrect);
+          }
           setRound(prev => prev + 1);
         }
       }, 600);

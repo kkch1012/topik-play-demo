@@ -48,6 +48,7 @@ export default function AntonymFinder() {
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [levelCorrect, setLevelCorrect] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_PER_ROUND);
   const [currentPair, setCurrentPair] = useState<AntonymPair | null>(null);
   const [options, setOptions] = useState<string[]>([]);
@@ -83,6 +84,7 @@ export default function AntonymFinder() {
     setCombo(0);
     setMaxCombo(0);
     setCorrectCount(0);
+    setLevelCorrect(0);
     setRound(1);
     setLevel(1);
     setUsedPairs(new Set());
@@ -90,6 +92,7 @@ export default function AntonymFinder() {
 
   useEffect(() => {
     if (gameState === 'playing' && round > 0) generateRound();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, gameState]);
 
   useEffect(() => {
@@ -147,8 +150,15 @@ export default function AntonymFinder() {
         if (answer === currentPair.antonym) sounds.levelUp();
         else sounds.gameOver();
       } else {
-        const newLevel = correctCount + (answer === currentPair.antonym ? 1 : 0) >= 4 ? Math.min(3, level + 1) : level;
-        setLevel(newLevel);
+        if (answer === currentPair.antonym) {
+          const newLevelCorrect = levelCorrect + 1;
+          if (newLevelCorrect >= 3 && level < 3) {
+            setLevel(prev => Math.min(3, prev + 1));
+            setLevelCorrect(0);
+          } else {
+            setLevelCorrect(newLevelCorrect);
+          }
+        }
         setRound(r => r + 1);
       }
     }, 800);

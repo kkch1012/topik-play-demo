@@ -29,7 +29,6 @@ const WORDS: HiddenWord[] = [
   { word: '냉장고', meaning: 'refrigerator', level: 2 },
   { word: '텔레비전', meaning: 'television', level: 3 },
   { word: '인공지능', meaning: 'artificial intelligence', level: 3 },
-  { word: '도서관', meaning: 'library', level: 2 },
   { word: '경찰서', meaning: 'police station', level: 2 },
   { word: '소방서', meaning: 'fire station', level: 2 },
 ];
@@ -143,6 +142,7 @@ export default function LetterHideSeek() {
 
   useEffect(() => {
     if (gameState === 'playing' && round > 0) generateRound();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, gameState]);
 
   useEffect(() => {

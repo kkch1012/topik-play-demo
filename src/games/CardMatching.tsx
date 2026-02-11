@@ -121,6 +121,7 @@ export default function CardMatching() {
         }, 800);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchedPairs, level, gameState]);
 
   const handleCardClick = (card: CardData) => {
@@ -148,15 +149,17 @@ export default function CardMatching() {
           vibrate(30);
           setMatchedPairs(prev => new Set(prev).add(first.pairId));
           setFlippedIds([]);
-          const newCombo = combo + 1;
-          setCombo(newCombo);
-          setMaxCombo(prev => Math.max(prev, newCombo));
+          setCombo(prev => {
+            const newCombo = prev + 1;
+            setMaxCombo(m => Math.max(m, newCombo));
+            const baseScore = 200 * level;
+            const comboBonus = Math.floor(newCombo / 2) * 100;
+            setScore(s => s + baseScore + comboBonus);
+            if (newCombo > 0 && newCombo % 4 === 0) sounds.combo();
+            return newCombo;
+          });
           setTotalMatched(t => t + 1);
-          const baseScore = 200 * level;
-          const comboBonus = Math.floor(newCombo / 2) * 100;
-          setScore(s => s + baseScore + comboBonus);
           lockRef.current = false;
-          if (newCombo > 0 && newCombo % 4 === 0) sounds.combo();
         }, 400);
       } else {
         // No match

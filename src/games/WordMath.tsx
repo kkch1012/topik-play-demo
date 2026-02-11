@@ -56,6 +56,7 @@ export default function WordMath() {
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [levelCorrect, setLevelCorrect] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_PER_ROUND);
   const [problem, setProblem] = useState<MathProblem | null>(null);
   const [options, setOptions] = useState<string[]>([]);
@@ -87,6 +88,7 @@ export default function WordMath() {
     setCombo(0);
     setMaxCombo(0);
     setCorrectCount(0);
+    setLevelCorrect(0);
     setRound(1);
     setLevel(1);
     setUsedProblems(new Set());
@@ -94,6 +96,7 @@ export default function WordMath() {
 
   useEffect(() => {
     if (gameState === 'playing' && round > 0) generateRound();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, gameState]);
 
   useEffect(() => {
@@ -145,10 +148,16 @@ export default function WordMath() {
     setTimeout(() => {
       if (round >= TOTAL_ROUNDS) {
         setGameState('result');
-        isCorrect ? sounds.levelUp() : sounds.gameOver();
+        if (isCorrect) sounds.levelUp(); else sounds.gameOver();
       } else {
-        if (isCorrect && correctCount + 1 >= 3 * level) {
-          setLevel(prev => Math.min(3, prev + 1));
+        if (isCorrect) {
+          const newLevelCorrect = levelCorrect + 1;
+          if (newLevelCorrect >= 3 && level < 3) {
+            setLevel(prev => Math.min(3, prev + 1));
+            setLevelCorrect(0);
+          } else {
+            setLevelCorrect(newLevelCorrect);
+          }
         }
         setRound(r => r + 1);
       }
